@@ -2,6 +2,8 @@
   "name": "multiselect",
   "private": false,
   "version": "0.0.3",
+  "private": true,
+  "version": "0.0.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
