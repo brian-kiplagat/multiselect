@@ -6,8 +6,8 @@
   "version": "0.0.6",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "cross-env NODE_ENV=development node ./bin/build.js",
+    "build": "cross-env NODE_ENV=production node ./bin/build.js",
     "preview": "vite preview",
     "lint": "eslint ./src && prettier --check ./src",
     "lint:fix": "eslint ./src --fix",
@@ -21,6 +21,7 @@
     "vite": "^6.3.5",
     "@changesets/changelog-git": "^0.2.0",
     "@changesets/cli": "^2.27.12",
+    "cross-env": "^7.0.3",
     "@finsweet/eslint-config": "^3.0.3",
     "@finsweet/tsconfig": "^1.4.2",
     "eslint": "^9.19.0",
