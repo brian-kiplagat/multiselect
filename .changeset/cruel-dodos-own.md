@@ -1,5 +1,0 @@
----
-"multi-select": patch
----
-
-test
