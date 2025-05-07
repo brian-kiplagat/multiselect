@@ -1,5 +1,11 @@
 # multiselect
 
+## 0.0.6
+
+### Patch Changes
+
+- 2d70978: fix: naming
+
 ## 0.0.5
 
 ### Patch Changes
