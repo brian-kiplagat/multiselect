@@ -1,7 +1,6 @@
 {
   "name": "@bitcoindevke/multiselect",
   "private": false,
-  "version": "0.0.4",
   "description": "multiselect for webflow.",
   "homepage": "https://github.com/briankiplagat/multiselect#readme",
   "version": "0.0.5",
