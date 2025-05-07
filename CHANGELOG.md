@@ -1,5 +1,11 @@
 # multiselect
 
+## 0.0.4
+
+### Patch Changes
+
+- f80c07b: fix: public
+
 ## 0.0.3
 
 ### Patch Changes
