@@ -1,5 +1,11 @@
 # multiselect
 
+## 0.0.2
+
+### Patch Changes
+
+- 78f96be: fix: add release
+
 ## 0.0.1
 
 ### Patch Changes
