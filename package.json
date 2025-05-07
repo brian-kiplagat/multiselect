@@ -3,7 +3,7 @@
   "private": false,
   "description": "multiselect for webflow.",
   "homepage": "https://github.com/briankiplagat/multiselect#readme",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node ./bin/build.js",
