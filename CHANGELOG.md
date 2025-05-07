@@ -1,5 +1,12 @@
 # multiselect
 
+## 0.0.7
+
+### Patch Changes
+
+- fc6d27e: esbuild
+- 0aeb6c0: fix: live reload
+
 ## 0.0.6
 
 ### Patch Changes
