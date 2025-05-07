@@ -1,5 +1,11 @@
 # multiselect
 
+## 0.0.3
+
+### Patch Changes
+
+- 99977cf: fix: test ci
+
 ## 0.0.2
 
 ### Patch Changes
