@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MultiSelect Component Demo</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      section {
+        margin-bottom: 40px;
+      }
+
+      h1 {
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 10px;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+        margin-top: 30px;
+        color: #374151;
+      }
+
+      .example-wrapper {
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-submit {
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 6px 12px;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #1d4ed8;
+      }
+
+      .control-panel {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .control-panel button {
+        background: #f3f4f6;
+        color: #374151;
+      }
+
+      .control-panel button:hover {
+        background: #e5e7eb;
+      }
+
+      /* Special styles for the skills example */
+      #skills-example [bobby-select-tag] {
+        background-color: #e0f2fe;
+        border: 1px solid #bae6fd;
+        color: #0369a1;
+      }
+
+      #skills-example [bobby-select-tag-remove] {
+        color: #0369a1;
+      }
+
+      #skills-example [bobby-select-tag-remove]:hover {
+        background-color: rgba(3, 105, 161, 0.1);
+      }
+
+      .example-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .example-grid-item {
+        padding: 15px;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+      }
+
+      .example-grid-title {
+        font-weight: 500;
+        margin-bottom: 10px;
+        color: #4b5563;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MultiSelect Component Examples</h1>
+
+    <!-- Skills-like example with items below input -->
+    <section>
+      <h2>Skills Selection Example</h2>
+      <div class="example-wrapper">
+        <div>
+          <label for="skills-example">Skills</label>
+          <div id="skills-example"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dropdown behavior examples -->
+    <section>
+      <h2>Dropdown Behavior Examples</h2>
+      <div class="example-wrapper">
+        <div class="example-grid">
+          <div class="example-grid-item">
+            <div class="example-grid-title">
+              Keep dropdown open after selection
+            </div>
+            <div id="keep-open-example"></div>
+          </div>
+          <div class="example-grid-item">
+            <div class="example-grid-title">Hide dropdown after selection</div>
+            <div id="hide-after-select-example"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Basic Example</h2>
+      <div class="example-wrapper">
+        <div id="basic-example"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Form Association</h2>
+      <div class="example-wrapper">
+        <form id="demo-form">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="skills">Skills (required):</label>
+            <div id="form-example"></div>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit">Submit Form</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section>
+      <h2>States & Variants</h2>
+
+      <h3>Disabled State</h3>
+      <div class="example-wrapper">
+        <div id="disabled-example"></div>
+      </div>
+
+      <h3>Read-only State</h3>
+      <div class="example-wrapper">
+        <div id="readonly-example"></div>
+      </div>
+
+      <h3>With Max Items (3)</h3>
+      <div class="example-wrapper">
+        <div id="max-items-example"></div>
+      </div>
+
+      <h3>With Max Tags Display (2)</h3>
+      <div class="example-wrapper">
+        <div id="max-tags-example"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Disabled Options</h2>
+      <div class="example-wrapper">
+        <div id="disabled-options-example"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Interactive Example</h2>
+      <div class="example-wrapper">
+        <div id="interactive-example"></div>
+        <div class="control-panel">
+          <button id="btn-toggle-disabled">Toggle Disabled</button>
+          <button id="btn-toggle-readonly">Toggle ReadOnly</button>
+          <button id="btn-clear">Clear All</button>
+          <button id="btn-add-option">Add Option</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="app">
+      <div tags-select="multiple"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

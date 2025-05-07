@@ -1,0 +1,97 @@
+:root {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.multi-select-container {
+  position: relative;
+  width: 100%;
+}
+
+.multi-select-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.multi-select-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.multi-select-toggle {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.multi-select-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 0.25rem;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.multi-select-option {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.multi-select-option:hover,
+.multi-select-option.active {
+  background: #f0f0f0;
+}
+
+.multi-select-empty {
+  padding: 0.5rem;
+  text-align: center;
+  color: #666;
+}
+
+.multi-select-selected {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.multi-select-tag {
+  display: inline-flex;
+  align-items: center;
+  background: #e9ecef;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.multi-select-tag-remove {
+  background: none;
+  border: none;
+  margin-left: 0.25rem;
+  cursor: pointer;
+  padding: 0 0.25rem;
+}
+
+.multi-select-tag-remove:hover {
+  color: #dc3545;
+}
