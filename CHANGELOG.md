@@ -1,5 +1,11 @@
 # multiselect
 
+## 0.0.5
+
+### Patch Changes
+
+- 1f5cda4: fix: trial
+
 ## 0.0.4
 
 ### Patch Changes
