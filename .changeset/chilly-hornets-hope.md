@@ -1,0 +1,5 @@
+---
+'multiselect': patch
+---
+
+fix: public
