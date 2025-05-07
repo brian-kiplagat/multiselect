@@ -6,12 +6,27 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint ./src && prettier --check ./src",
+    "lint:fix": "eslint ./src --fix",
+    "check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@eslint/js": "^9.19.0",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "@changesets/changelog-git": "^0.2.0",
-    "@changesets/cli": "^2.27.12"
+    "@changesets/cli": "^2.27.12",
+    "@finsweet/eslint-config": "^3.0.3",
+    "@finsweet/tsconfig": "^1.4.2",
+    "eslint": "^9.19.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "prettier": "^3.4.2",
+    "typescript-eslint": "^8.23.0"
+  },
+  "dependencies": {
+    "@finsweet/ts-utils": "^0.40.0"
   }
 }

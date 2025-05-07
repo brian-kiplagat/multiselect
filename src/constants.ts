@@ -9,7 +9,7 @@
 
 // The global attribute prefix for the component
 // Change this value to customize the attribute namespace
-export const COMPONENT_PREFIX = "bobby-select";
+export const COMPONENT_PREFIX = 'bobby-select';
 
 // Generate attribute constants with the prefix
 export const Attributes = {

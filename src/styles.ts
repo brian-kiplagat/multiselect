@@ -1,4 +1,4 @@
-import { Attributes, States, COMPONENT_PREFIX } from "./constants";
+import { Attributes, COMPONENT_PREFIX, States } from './constants';
 
 /**
  * Creates the component's CSS using the current attribute prefix
@@ -268,7 +268,7 @@ export const injectMultiSelectStyles = (): void => {
   }
 
   // Create the style element
-  const styleElement = document.createElement("style");
+  const styleElement = document.createElement('style');
   styleElement.id = styleId;
   styleElement.textContent = createMultiSelectStyles();
 

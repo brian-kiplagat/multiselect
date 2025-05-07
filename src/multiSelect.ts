@@ -1,5 +1,5 @@
-import { Attributes, States } from "./constants";
-import { injectMultiSelectStyles } from "./styles";
+import { Attributes, States } from './constants';
+import { injectMultiSelectStyles } from './styles';
 
 // Static flag to track if styles have been injected
 let stylesInjected = false;
@@ -38,18 +38,13 @@ export interface MultiSelectConfig {
   // Validation
   formAssociated?: boolean;
   validationMessage?: string;
-  customValidation?: (
-    selected: string[]
-  ) => { valid: boolean; message: string } | null;
+  customValidation?: (selected: string[]) => { valid: boolean; message: string } | null;
 
   // Callbacks
   onChange?: (selected: string[], instance: MultiSelect) => void;
   onOpen?: (instance: MultiSelect) => void;
   onClose?: (instance: MultiSelect) => void;
-  onCreateOption?: (
-    value: string,
-    instance: MultiSelect
-  ) => Option | Promise<Option> | void;
+  onCreateOption?: (value: string, instance: MultiSelect) => Option | Promise<Option> | void;
   onFocus?: (instance: MultiSelect) => void;
   onBlur?: (instance: MultiSelect) => void;
 }
@@ -77,7 +72,7 @@ export class MultiSelect {
     this.config = {
       // Set defaults
       selected: [],
-      placeholder: "Select options...",
+      placeholder: 'Select options...',
       disabled: false,
       readOnly: false,
       required: false,
@@ -86,7 +81,7 @@ export class MultiSelect {
       allowCreation: false,
       hideDropdownOnSelect: false,
       formAssociated: false,
-      maxHeight: "250px",
+      maxHeight: '250px',
       ...config,
     };
 
@@ -95,7 +90,7 @@ export class MultiSelect {
     this.selected = this.config.selected || [];
 
     // Create main elements
-    this.container.setAttribute(Attributes.CONTAINER, "");
+    this.container.setAttribute(Attributes.CONTAINER, '');
     if (this.config.className) {
       this.container.className = this.config.className;
     }
@@ -128,7 +123,7 @@ export class MultiSelect {
    */
   public setSelected(values: string[]): void {
     this.selected = values.filter((value) =>
-      this.options.some((option) => option.value === value && !option.disabled)
+      this.options.some((option) => option.value === value && !option.disabled),
     );
     this.render();
     this.updateFormValue();
@@ -172,7 +167,7 @@ export class MultiSelect {
   public close(): void {
     this.isOpen = false;
     this.activeIndex = -1;
-    this.dropdownElement.style.display = "none";
+    this.dropdownElement.style.display = 'none';
     this.config.onClose?.(this);
   }
 
@@ -193,7 +188,7 @@ export class MultiSelect {
    */
   public disable(): void {
     this.config.disabled = true;
-    this.mainWrapper.setAttribute(States.DISABLED, "");
+    this.mainWrapper.setAttribute(States.DISABLED, '');
     this.inputElement.disabled = true;
     if (this.hiddenInput) {
       this.hiddenInput.disabled = true;
@@ -207,7 +202,7 @@ export class MultiSelect {
   public setReadOnly(readOnly: boolean): void {
     this.config.readOnly = readOnly;
     if (readOnly) {
-      this.mainWrapper.setAttribute(States.READONLY, "");
+      this.mainWrapper.setAttribute(States.READONLY, '');
       this.inputElement.readOnly = true;
       this.close();
     } else {
@@ -223,7 +218,7 @@ export class MultiSelect {
     if (this.config.required && this.selected.length === 0) {
       return {
         valid: false,
-        message: this.config.validationMessage || "This field is required",
+        message: this.config.validationMessage || 'This field is required',
       };
     }
 
@@ -238,14 +233,14 @@ export class MultiSelect {
       return this.config.customValidation(this.selected);
     }
 
-    return { valid: true, message: "" };
+    return { valid: true, message: '' };
   }
 
   /**
    * Destroy the component and remove all event listeners
    */
   public destroy(): void {
-    document.removeEventListener("click", this.handleOutsideClick);
+    document.removeEventListener('click', this.handleOutsideClick);
     // Remove the component from the DOM
     while (this.container.firstChild) {
       this.container.removeChild(this.container.firstChild);
@@ -256,71 +251,70 @@ export class MultiSelect {
 
   private createElements() {
     // Create main wrapper
-    this.mainWrapper = document.createElement("div");
-    this.mainWrapper.setAttribute(Attributes.WRAPPER, "");
+    this.mainWrapper = document.createElement('div');
+    this.mainWrapper.setAttribute(Attributes.WRAPPER, '');
     if (this.config.maxWidth) {
       this.mainWrapper.style.maxWidth = this.config.maxWidth;
     }
 
     // Create input wrapper
-    const inputWrapper = document.createElement("div");
-    inputWrapper.setAttribute(Attributes.INPUT_WRAPPER, "");
+    const inputWrapper = document.createElement('div');
+    inputWrapper.setAttribute(Attributes.INPUT_WRAPPER, '');
 
     // Create input
-    this.inputElement = document.createElement("input");
-    this.inputElement.type = "text";
-    this.inputElement.setAttribute(Attributes.INPUT, "");
-    this.inputElement.placeholder =
-      this.config.placeholder || "Select options...";
+    this.inputElement = document.createElement('input');
+    this.inputElement.type = 'text';
+    this.inputElement.setAttribute(Attributes.INPUT, '');
+    this.inputElement.placeholder = this.config.placeholder || 'Select options...';
     if (!this.config.searchable) {
       this.inputElement.readOnly = true;
     }
 
     // Create hidden input for form association
     if (this.config.formAssociated && this.config.name) {
-      this.hiddenInput = document.createElement("input");
-      this.hiddenInput.type = "hidden";
+      this.hiddenInput = document.createElement('input');
+      this.hiddenInput.type = 'hidden';
       this.hiddenInput.name = this.config.name;
-      this.hiddenInput.value = this.selected.join(",");
+      this.hiddenInput.value = this.selected.join(',');
       if (this.config.required) {
         this.hiddenInput.required = true;
       }
     }
 
     // Create dropdown toggle button
-    const toggleButton = document.createElement("button");
-    toggleButton.type = "button";
-    toggleButton.setAttribute(Attributes.TOGGLE, "");
-    toggleButton.setAttribute("aria-label", "Toggle dropdown");
-    toggleButton.innerHTML = "▼";
-    toggleButton.addEventListener("click", (e) => {
+    const toggleButton = document.createElement('button');
+    toggleButton.type = 'button';
+    toggleButton.setAttribute(Attributes.TOGGLE, '');
+    toggleButton.setAttribute('aria-label', 'Toggle dropdown');
+    toggleButton.innerHTML = '▼';
+    toggleButton.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       this.toggleDropdown();
     });
 
     // Create dropdown
-    this.dropdownElement = document.createElement("div");
-    this.dropdownElement.setAttribute(Attributes.DROPDOWN, "");
-    this.dropdownElement.style.display = "none";
+    this.dropdownElement = document.createElement('div');
+    this.dropdownElement.setAttribute(Attributes.DROPDOWN, '');
+    this.dropdownElement.style.display = 'none';
     if (this.config.maxHeight) {
       this.dropdownElement.style.maxHeight = this.config.maxHeight;
     }
 
     // Create selected items container
-    this.selectedContainer = document.createElement("div");
-    this.selectedContainer.setAttribute(Attributes.SELECTED, "");
+    this.selectedContainer = document.createElement('div');
+    this.selectedContainer.setAttribute(Attributes.SELECTED, '');
 
     // Create clear button if clearable
     let clearButton;
     if (this.config.clearable) {
-      clearButton = document.createElement("button");
-      clearButton.type = "button";
-      clearButton.setAttribute(Attributes.CLEAR, "");
-      clearButton.setAttribute("aria-label", "Clear all selected");
-      clearButton.innerHTML = "✕";
-      clearButton.style.display = "none";
-      clearButton.addEventListener("click", (e) => {
+      clearButton = document.createElement('button');
+      clearButton.type = 'button';
+      clearButton.setAttribute(Attributes.CLEAR, '');
+      clearButton.setAttribute('aria-label', 'Clear all selected');
+      clearButton.innerHTML = '✕';
+      clearButton.style.display = 'none';
+      clearButton.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         this.clear();
@@ -359,15 +353,15 @@ export class MultiSelect {
 
   private setupEventListeners() {
     // Input events
-    this.inputElement.addEventListener("focus", () => {
+    this.inputElement.addEventListener('focus', () => {
       if (!this.config.disabled && !this.config.readOnly) {
         this.open();
-        this.mainWrapper.setAttribute(States.FOCUSED, "");
+        this.mainWrapper.setAttribute(States.FOCUSED, '');
         this.config.onFocus?.(this);
       }
     });
 
-    this.inputElement.addEventListener("blur", () => {
+    this.inputElement.addEventListener('blur', () => {
       // Only remove focus if not clicking inside the component
       setTimeout(() => {
         if (!this.mainWrapper.contains(document.activeElement)) {
@@ -376,16 +370,16 @@ export class MultiSelect {
       }, 100);
     });
 
-    this.inputElement.addEventListener("input", () => {
+    this.inputElement.addEventListener('input', () => {
       if (this.config.searchable) {
         this.handleInput();
       }
     });
 
-    this.inputElement.addEventListener("keydown", (e) => this.handleKeydown(e));
+    this.inputElement.addEventListener('keydown', (e) => this.handleKeydown(e));
 
     // Click outside to close
-    document.addEventListener("click", this.handleOutsideClick);
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   private toggleDropdown() {
@@ -407,22 +401,19 @@ export class MultiSelect {
     }
 
     switch (e.key) {
-      case "ArrowDown":
+      case 'ArrowDown':
         e.preventDefault();
         this.open();
-        this.activeIndex = Math.min(
-          this.activeIndex + 1,
-          this.getFilteredOptions().length - 1
-        );
+        this.activeIndex = Math.min(this.activeIndex + 1, this.getFilteredOptions().length - 1);
         this.renderDropdown();
         break;
-      case "ArrowUp":
+      case 'ArrowUp':
         e.preventDefault();
         this.open();
         this.activeIndex = Math.max(this.activeIndex - 1, -1);
         this.renderDropdown();
         break;
-      case "Enter":
+      case 'Enter':
         e.preventDefault();
         if (this.isOpen) {
           if (this.activeIndex >= 0) {
@@ -430,23 +421,20 @@ export class MultiSelect {
             if (!option.disabled) {
               this.toggleOption(option.value);
             }
-          } else if (
-            this.config.allowCreation &&
-            this.inputElement.value.trim()
-          ) {
+          } else if (this.config.allowCreation && this.inputElement.value.trim()) {
             this.createOption(this.inputElement.value.trim());
           }
         } else {
           this.open();
         }
         break;
-      case "Escape":
+      case 'Escape':
         e.preventDefault();
         this.close();
         this.inputElement.blur();
         break;
-      case "Backspace":
-        if (this.inputElement.value === "" && this.selected.length > 0) {
+      case 'Backspace':
+        if (this.inputElement.value === '' && this.selected.length > 0) {
           // Remove the last selected item when pressing backspace on empty input
           this.removeOption(this.selected[this.selected.length - 1]);
         }
@@ -457,16 +445,13 @@ export class MultiSelect {
   private getFilteredOptions(): Option[] {
     const input = this.inputElement.value.toLowerCase();
 
-    if (!this.config.searchable || input === "") {
-      return this.options.filter(
-        (option) => !this.selected.includes(option.value)
-      );
+    if (!this.config.searchable || input === '') {
+      return this.options.filter((option) => !this.selected.includes(option.value));
     }
 
     return this.options.filter(
       (option) =>
-        !this.selected.includes(option.value) &&
-        option.label.toLowerCase().includes(input)
+        !this.selected.includes(option.value) && option.label.toLowerCase().includes(input),
     );
   }
 
@@ -492,7 +477,7 @@ export class MultiSelect {
 
     if (!this.selected.includes(value)) {
       this.selected.push(value);
-      this.inputElement.value = "";
+      this.inputElement.value = '';
       this.render();
       this.updateFormValue();
       this.config.onChange?.(this.selected, this);
@@ -516,15 +501,13 @@ export class MultiSelect {
   private async createOption(value: string) {
     if (this.config.onCreateOption) {
       try {
-        const newOption = await Promise.resolve(
-          this.config.onCreateOption(value, this)
-        );
+        const newOption = await Promise.resolve(this.config.onCreateOption(value, this));
         if (newOption) {
           this.addOption(newOption);
           this.selectOption(newOption.value);
         }
       } catch (error) {
-        console.error("Error creating option:", error);
+        console.error('Error creating option:', error);
       }
     } else {
       // Default behavior: create an option with the same value and label
@@ -533,43 +516,41 @@ export class MultiSelect {
       this.selectOption(value);
     }
 
-    this.inputElement.value = "";
+    this.inputElement.value = '';
   }
 
   private updateFormValue() {
     if (this.hiddenInput) {
-      this.hiddenInput.value = this.selected.join(",");
+      this.hiddenInput.value = this.selected.join(',');
     }
 
     // Update clear button visibility
-    const clearButton = this.mainWrapper.querySelector<HTMLButtonElement>(
-      `[${Attributes.CLEAR}]`
-    );
+    const clearButton = this.mainWrapper.querySelector<HTMLButtonElement>(`[${Attributes.CLEAR}]`);
     if (clearButton) {
-      clearButton.style.display = this.selected.length > 0 ? "block" : "none";
+      clearButton.style.display = this.selected.length > 0 ? 'block' : 'none';
     }
   }
 
   private renderDropdown() {
     if (!this.isOpen) {
-      this.dropdownElement.style.display = "none";
+      this.dropdownElement.style.display = 'none';
       return;
     }
 
     const filteredOptions = this.getFilteredOptions();
-    this.dropdownElement.style.display = "block";
-    this.dropdownElement.innerHTML = "";
+    this.dropdownElement.style.display = 'block';
+    this.dropdownElement.innerHTML = '';
 
     filteredOptions.forEach((option, index) => {
-      const optionElement = document.createElement("div");
-      optionElement.setAttribute(Attributes.OPTION, "");
+      const optionElement = document.createElement('div');
+      optionElement.setAttribute(Attributes.OPTION, '');
 
       if (option.disabled) {
-        optionElement.setAttribute(States.DISABLED, "");
+        optionElement.setAttribute(States.DISABLED, '');
       }
 
       if (index === this.activeIndex) {
-        optionElement.setAttribute(States.ACTIVE, "");
+        optionElement.setAttribute(States.ACTIVE, '');
       }
 
       optionElement.textContent = option.label;
@@ -578,7 +559,7 @@ export class MultiSelect {
         optionElement.title = option.title;
       }
 
-      optionElement.addEventListener("click", (e) => {
+      optionElement.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -591,14 +572,10 @@ export class MultiSelect {
     });
 
     if (filteredOptions.length === 0) {
-      const emptyMessage = document.createElement("div");
-      emptyMessage.setAttribute(Attributes.EMPTY, "");
+      const emptyMessage = document.createElement('div');
+      emptyMessage.setAttribute(Attributes.EMPTY, '');
 
-      if (
-        this.config.searchable &&
-        this.inputElement.value.trim() &&
-        this.config.allowCreation
-      ) {
+      if (this.config.searchable && this.inputElement.value.trim() && this.config.allowCreation) {
         emptyMessage.innerHTML = `
           No options found. 
           <button type="button" ${Attributes.CREATE}>
@@ -606,18 +583,16 @@ export class MultiSelect {
           </button>
         `;
 
-        const createButton = emptyMessage.querySelector(
-          `[${Attributes.CREATE}]`
-        );
+        const createButton = emptyMessage.querySelector(`[${Attributes.CREATE}]`);
         if (createButton) {
-          createButton.addEventListener("click", (e) => {
+          createButton.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             this.createOption(this.inputElement.value.trim());
           });
         }
       } else {
-        emptyMessage.textContent = "No options found";
+        emptyMessage.textContent = 'No options found';
       }
 
       this.dropdownElement.appendChild(emptyMessage);
@@ -626,7 +601,7 @@ export class MultiSelect {
 
   private render() {
     // Render selected items
-    this.selectedContainer.innerHTML = "";
+    this.selectedContainer.innerHTML = '';
 
     // Handle maxTags limit for display
     const displayLimit =
@@ -640,26 +615,26 @@ export class MultiSelect {
       const option = this.options.find((o) => o.value === value);
 
       if (option) {
-        const tag = document.createElement("span");
-        tag.setAttribute(Attributes.TAG, "");
+        const tag = document.createElement('span');
+        tag.setAttribute(Attributes.TAG, '');
 
         // Add accessible attributes
-        tag.setAttribute("role", "listitem");
-        tag.setAttribute("aria-label", `Selected: ${option.label}`);
+        tag.setAttribute('role', 'listitem');
+        tag.setAttribute('aria-label', `Selected: ${option.label}`);
 
-        const labelSpan = document.createElement("span");
-        labelSpan.setAttribute(Attributes.TAG_LABEL, "");
+        const labelSpan = document.createElement('span');
+        labelSpan.setAttribute(Attributes.TAG_LABEL, '');
         labelSpan.textContent = option.label;
         tag.appendChild(labelSpan);
 
         if (!this.config.disabled && !this.config.readOnly) {
-          const removeButton = document.createElement("button");
-          removeButton.type = "button";
-          removeButton.setAttribute(Attributes.TAG_REMOVE, "");
-          removeButton.innerHTML = "×";
-          removeButton.setAttribute("aria-label", `Remove ${option.label}`);
+          const removeButton = document.createElement('button');
+          removeButton.type = 'button';
+          removeButton.setAttribute(Attributes.TAG_REMOVE, '');
+          removeButton.innerHTML = '×';
+          removeButton.setAttribute('aria-label', `Remove ${option.label}`);
 
-          removeButton.addEventListener("click", (e) => {
+          removeButton.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             this.removeOption(value);
@@ -675,26 +650,26 @@ export class MultiSelect {
     // Show count of additional items if needed
     if (this.config.maxTags && this.selected.length > this.config.maxTags) {
       const extraCount = this.selected.length - this.config.maxTags;
-      const countBadge = document.createElement("span");
-      countBadge.setAttribute(Attributes.COUNT, "");
+      const countBadge = document.createElement('span');
+      countBadge.setAttribute(Attributes.COUNT, '');
       countBadge.textContent = `+${extraCount}`;
       this.selectedContainer.appendChild(countBadge);
     }
 
     // Update accessibility attributes
-    this.selectedContainer.setAttribute("role", "list");
-    this.selectedContainer.setAttribute("aria-label", "Selected options");
+    this.selectedContainer.setAttribute('role', 'list');
+    this.selectedContainer.setAttribute('aria-label', 'Selected options');
 
     // Update validation UI if needed
     const validation = this.validate();
     if (validation && !validation.valid) {
-      this.mainWrapper.setAttribute(States.INVALID, "");
+      this.mainWrapper.setAttribute(States.INVALID, '');
 
       // Add or update validation message
       let errorElement = this.container.querySelector(`[${Attributes.ERROR}]`);
       if (!errorElement) {
-        errorElement = document.createElement("div");
-        errorElement.setAttribute(Attributes.ERROR, "");
+        errorElement = document.createElement('div');
+        errorElement.setAttribute(Attributes.ERROR, '');
         this.container.appendChild(errorElement);
       }
 
@@ -705,9 +680,7 @@ export class MultiSelect {
       this.mainWrapper.removeAttribute(States.INVALID);
 
       // Remove error message if it exists
-      const errorElement = this.container.querySelector(
-        `[${Attributes.ERROR}]`
-      );
+      const errorElement = this.container.querySelector(`[${Attributes.ERROR}]`);
       if (errorElement) {
         errorElement.remove();
       }
